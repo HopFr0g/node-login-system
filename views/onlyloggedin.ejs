@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- settings: -->
+        <meta charset="utf-8">
+        <title>Agenda - Home</title>
+        
+        <!-- CSS main file: -->
+        <link rel="stylesheet" type="text/css" href="/styles/onlyloggedin.css">
+        
+        <!-- CSS general purpose files: -->
+        <link rel="stylesheet" type="text/css" href="/styles/env.css">
+        <link rel="stylesheet" type="text/css" href="/styles/fancy.css">
+        <link rel="stylesheet" type="text/css" href="/styles/normalize.css">
+        <link rel="stylesheet" type="text/css" href="/styles/structure.css">
+        <link rel="stylesheet" type="text/css" href="/styles/notification-box.css">
+        
+        <!-- meta viewport tag: -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- icons script: -->
+		<script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+        
+        <!-- fonts: -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content">
+            <header class="header">
+                <h1>Agenda</h1>
+            </header>
+            <nav class="nav">
+                <nav class="nav-responsive">
+                    <div class="nav-responsive__button-container">
+                        <div class="nav-responsive__button fas fa-bars"></div>
+                    </div>
+                    <div class="nav-responsive__a-container">
+                        <a href="/" class="nav-responsive__a"><i class="fas fa-home"></i>Home</a>
+                        <a href="/onlyloggedin" class="nav-responsive__a active"><i class="fas fa-book"></i>Only logged-in</a>
+                        <a href="/account" class="nav-responsive__a"><i class="fas fa-user"></i><%= username %></a>
+                    </div>
+                </nav>
+                <nav class="nav-normal">
+                    <a href="/" class="nav-normal__a"><i class="fas fa-home"></i>Home</a>
+                    <a href="/onlyloggedin" class="nav-normal__a active"><i class="fas fa-book"></i>Only logged-in</a>
+                    <a href="/account" class="nav-normal__a nav-normal__a-right"><i class="fas fa-user"></i><%= username %></a>
+                </nav>
+            </nav>
+            <main class="main">
+                <h2 class="fancy__title">Hi, <%= username %>.</h2>
+                <p class="fancy__subtitle">If you are seeing this, it is because you are correctly logged in.</p>
+                <p class="fancy__subtitle">Yor email address is <%= email %></p>
+            </main>
+            <footer class="footer">
+                Created by HopFr0g
+            </footer>
+        </div>
+        
+        <script src="/scripts/structure.js"></script>
+    </body>
+</html>
