@@ -16,7 +16,6 @@ const PasportLocal = require("passport-local").Strategy;
 const auth = require("./auth.js");
 const userValidator = require("./user-validator.js");
 const dbManager = require("./dbmanager.js");
-const collections = require("./collections.js");
 
 // Express middleware to read request body:
 app.use(express.urlencoded({extended: true}));
@@ -81,7 +80,6 @@ app.get("/", (req, res) => {
 // Example of a page that can only be accessed by logged in users:
 app.get("/onlyloggedin", checkAuthentication, (req, res) => {
     res.render("onlyloggedin.ejs", req.user);
-    console.log(req.user);
 });
 
 // Account settings:
@@ -146,7 +144,9 @@ app.post("/signup", async (req, res) => {
         validatedData.email = await userValidator.validateEmailAvailability(email, 0); // Code is 0 for "success" status instead of an error code, to avoid "user enumeration" attack.
         
         let confirmationCode = await auth.registerUser(validatedData);
-        console.log(`TODO: Send e-mail with confirmation code http://127.0.0.1:3000/signup/confirm/${confirmationCode}`); // TODO
+        
+        // TODO: Send e-mail with confirmation code
+        console.log(`http://127.0.0.1:3000/signup/confirm/${confirmationCode}`);
         
         return res.redirect(`/signup?code=0`);
     } catch (error) {

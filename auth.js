@@ -8,7 +8,6 @@ const bcrypt = require("bcrypt");
 
 const idGenerator = require("./id-generator.js");
 const dbManager = require("./dbmanager.js");
-const collections = require("./collections.js");
 
 const authenticate = async (username, password) => {
     try {
@@ -51,8 +50,6 @@ const confirmUser = userConfirmationId => {
             await dbManager.editRow(__dirname + "/users/users.db", "userdata", "id", userData.id, "verified", 1);
             // Once verified the email address, remove the confirmation id from "userdata" table on "users.db" (the confirmation id is not needed anymore):
             await dbManager.editRow(__dirname + "/users/users.db", "userdata", "id", userData.id, "confirmationid", null);
-            // create a new database file for collections for this user:
-            await collections.createCollectionsDatabase(userData.id);
             resolve();
         } catch (error) {
             reject(error);

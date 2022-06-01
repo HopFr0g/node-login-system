@@ -79,7 +79,7 @@ const removeRow = (dbDir, tableName, idKey, idValue) => {
     });
 }
 
-const removeIfExists = async (dbDir, tableName, idKey, idValue) => {console.log("removeIfExists");
+const removeIfExists = async (dbDir, tableName, idKey, idValue) => {
     if (!findRow(dbDir, tableName, idKey, idValue))
         return;
     try {
