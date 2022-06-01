@@ -78,64 +78,15 @@ app.get("/", (req, res) => {
     res.render("index.ejs", req.user);
 });
 
+// Example of a page that can only be accessed by logged in users:
+app.get("/onlyloggedin", checkAuthentication, (req, res) => {
+    res.render("onlyloggedin.ejs", req.user);
+    console.log(req.user);
+});
+
 // Account settings:
 app.get("/account", checkAuthentication, (req, res) => {
     res.render("account.ejs", req.user);
-});
-
-// Collections:
-app.get("/collections", checkAuthentication, (req, res) => {
-    res.render("collections.ejs", req.user);
-});
-
-app.post("/renamecollection", checkAuthentication, async (req, res) => {
-    try {
-        await collections.renameCollection(req.user.id, req.body.id, req.body.name);
-        res.status(201).end();
-    } catch (error) {
-        res.status(400).send(error);
-    }
-})
-
-app.get("/getcollections", checkAuthentication, async (req, res) => {
-    try {
-        const collectionNames = await collections.getCollections(req.user.id);
-        res.status(201).json(collectionNames);
-    } catch (error) {
-        res.status(400).send(error);
-    }
-});
-
-app.post("/deletecollection", checkAuthentication, async (req, res) => {
-    try {
-        await collections.deleteCollection(req.user.id, req.body.id);
-        res.status(201).end();
-    } catch (error) {
-        res.status(400).send(error);
-    }
-});
-
-app.get("/createcollection", checkAuthentication, async (req, res) => {
-    try {
-        let collectionData = await collections.createCollection(req.user.id);
-        res.status(201).json(collectionData);
-    } catch (error) {
-        res.status(400).send(error);
-    }
-});
-
-// Entries (tasks):
-app.get("/tasks", checkAuthentication, async (req, res) => {
-    res.render("tasks.ejs", req.user);
-});
-
-app.post("/getentries", checkAuthentication, async (req, res) => {
-    try {
-        const entries = await collections.getEntries(req.user.id, req.body.collectionId);
-        res.status(201).json(entries);
-    } catch (error) {
-        res.status(400).send(error);
-    }
 });
 
 // x-----------------x LOGIN, REGISTER AND FORGOT PASSWORD REQUEST HANDLING x-----------------x //

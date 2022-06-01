@@ -251,17 +251,4 @@ const createDataBase = dbDir => {
     });
 }
 
-// findRow("test.db", "users", "id", "*").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// editRow("test.db", "users", "id", "400", "age", "22").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// removeRow("test.db", "users", "id", "500").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// addRow("test.db", "users", {"id":8,"username":"Manuel","age":"0"}).then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// createTable(__dirname + "/users/collections/hopfr0g.db", "fútbol", {name:"id", type:"TEXT", primaryKey: true}, {name:"age", type:"INTEGER"}).then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// renameTable(__dirname + "/users/collections/hopfr0g.db", "balonpié", "futbol").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// removeTable(__dirname + "/users/collections/hopfr0g.db", "futbol").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// getRows(__dirname + "/users/collections/hopfr0g.db", "feriados").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// getTableNames(__dirname + "/users/collections/hopfr0g.db").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// countRows(__dirname + "/users/collections/hopfr0g.db", "Feriados").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// editAllRow(__dirname + "/users/collections/hopfr0g.db", "Feriados", "id", "1234", {id: "Ac56l49C", date: "2021-08-26 17:00:00.000", repeat: "5", title: "Llegada de Manuel", description: "Manuel es un perro"}).then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-// createDataBase(__dirname + "/users/collections/pepito.db").then(data => console.log(data), error => console.log(error)).catch(error => console.log(error));
-
 module.exports = {findRow, editRow, editAllRow, removeRow, removeIfExists, addRow, createTable, renameTable, removeTable, getRows, getTableNames, countRows, createDataBase};
