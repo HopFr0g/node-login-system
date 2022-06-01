@@ -1,6 +1,6 @@
 "use strict";
 
-const dbManager = require("./dbmanager.js");
+const DbManager = require("./DbManager.js");
 
 const allowedMailServices = ["@gmail.com", "@outlook.com", "@hotmail.com", "@yahoo.com"];
 
@@ -39,7 +39,7 @@ const validateUsernameAvailability = (username, errorCode) => {
     return new Promise(async (resolve, reject) => {
         const lowercaseName = username.toLowerCase();
         
-        if (await dbManager.findRow(__dirname + "/users/users.db", "userdata", "id", lowercaseName))
+        if (await DbManager.findRow(__dirname + "/users/users.db", "userdata", "id", lowercaseName))
             return reject(errorCode);
         
         resolve(username);
@@ -106,7 +106,7 @@ const validateEmailAvailability = (email, errorCode) => {
     return new Promise(async (resolve, reject) => {
         email = email.toLowerCase();
         
-        const rowFound = await dbManager.findRow(__dirname + "/users/users.db", "userdata", "email", email);
+        const rowFound = await DbManager.findRow(__dirname + "/users/users.db", "userdata", "email", email);
         
         if (!rowFound || rowFound.verified == 0)
             return resolve(email);
@@ -120,7 +120,7 @@ const validateResetPasswordId = (resetPasswordId, errorCode) => {
         if (typeof resetPasswordId != "string")
             return reject(errorCode);
         
-        let userData = await dbManager.findRow(__dirname + "/users/users.db", "userdata", "resetpasswordid", resetPasswordId);
+        let userData = await DbManager.findRow(__dirname + "/users/users.db", "userdata", "resetpasswordid", resetPasswordId);
         if (!userData)
             return reject(errorCode);
         

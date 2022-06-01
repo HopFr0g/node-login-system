@@ -1,6 +1,6 @@
 "use strict";
 
-const dbManager = require("./dbmanager.js");
+const DbManager = require("./DbManager.js");
 
 const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -35,7 +35,7 @@ const generateId = (length, databaseInfo /* optional */ ) => {
                 isValid = true;
             else
                 try {
-                    isValid = !await dbManager.findRow(databaseInfo.dir, databaseInfo.table, databaseInfo.column, id);
+                    isValid = !await DbManager.findRow(databaseInfo.dir, databaseInfo.table, databaseInfo.column, id);
                 } catch (error) {
                     reject(error);
                 }

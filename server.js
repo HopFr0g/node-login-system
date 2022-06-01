@@ -10,18 +10,17 @@ const session = require("express-session");
 
 const PasportLocal = require("passport-local").Strategy;
 
-const auth = require("./auth.js");
-const userValidator = require("./user-validator.js");
-const dbManager = require("./dbmanager.js");
-const settingsLoader = require("./settingsLoader.js");
+const Auth = require("./Auth.js");
+const UserValidator = require("./UserValidator.js");
+const DbManager = require("./DbManager.js");
+const SettingsLoader = require("./SettingsLoader.js");
 
 // Express middleware to read request body:
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // Cookie parser:
-const secret = settingsLoader.load("cookieParserSecret");
-console.log(secret);
+const secret = SettingsLoader.load("cookieParserSecret");
 app.use(cookieParser(secret));
 
 // EJS view engine:
@@ -44,11 +43,11 @@ app.use(passport.session());
 
 // Passport login strategy:
 const getUserData = async username => {
-    return await dbManager.findRow(__dirname + "/users/users.db", "userdata", "id", username);
+    return await DbManager.findRow(__dirname + "/users/users.db", "userdata", "id", username);
 }
 
 passport.use(new PasportLocal(async (username, password, done) => {
-    if (await auth.authenticate(username, password))
+    if (await Auth.authenticate(username, password))
         return done(null, await getUserData(username)); // User found.
     done(null, false); // User not found.
 }));
@@ -60,7 +59,7 @@ passport.serializeUser((user, done) => {
 
 // Deserialization (from a single user data, all the others are obtained):
 passport.deserializeUser(async (id, done) => {
-    done(null, await dbManager.findRow(__dirname + "/users/users.db", "userdata", "id", id));
+    done(null, await DbManager.findRow(__dirname + "/users/users.db", "userdata", "id", id));
 });
 
 // Function used as a middleware on every request handling function that need confirm is user is loged in before:
@@ -130,20 +129,20 @@ app.post("/signup", async (req, res) => {
         let validatedData = new Object();
         
         let username = req.body.username;
-        validatedData.username = await userValidator.validateUsernameLength(username, 1);
-        validatedData.username = await userValidator.validateUsernameContent(username, 2);
-        validatedData.username = await userValidator.validateUsernameAvailability(username, 3);
+        validatedData.username = await UserValidator.validateUsernameLength(username, 1);
+        validatedData.username = await UserValidator.validateUsernameContent(username, 2);
+        validatedData.username = await UserValidator.validateUsernameAvailability(username, 3);
         
         let password = req.body.password;
-        validatedData.password = await userValidator.validatePasswordLength(password, 4);
-        validatedData.password = await userValidator.validatePasswordContent(password, 5);
+        validatedData.password = await UserValidator.validatePasswordLength(password, 4);
+        validatedData.password = await UserValidator.validatePasswordContent(password, 5);
         
         let email = req.body.email;
-        validatedData.email = await userValidator.validateEmailFormat(email, 6);
-        validatedData.email = await userValidator.validateEmailService(email, 7);
-        validatedData.email = await userValidator.validateEmailAvailability(email, 0); // Code is 0 for "success" status instead of an error code, to avoid "user enumeration" attack.
+        validatedData.email = await UserValidator.validateEmailFormat(email, 6);
+        validatedData.email = await UserValidator.validateEmailService(email, 7);
+        validatedData.email = await UserValidator.validateEmailAvailability(email, 0); // Code is 0 for "success" status instead of an error code, to avoid "user enumeration" attack.
         
-        let confirmationCode = await auth.registerUser(validatedData);
+        let confirmationCode = await Auth.registerUser(validatedData);
         
         // TODO: Send e-mail with confirmation code
         console.log(`http://127.0.0.1:3000/signup/confirm/${confirmationCode}`);
@@ -161,7 +160,7 @@ app.get("/signup/confirm/:confirmationid", async (req, res) => {
         if (req.isAuthenticated())
             req.logOut();
         
-        await auth.confirmUser(req.params.confirmationid);
+        await Auth.confirmUser(req.params.confirmationid);
         return res.render("confirmation.ejs", {success: true});
     } catch (error) {
         return res.render("confirmation.ejs", {success: false});
@@ -176,7 +175,7 @@ app.get("/forgotpassword", (req, res) => {
 });
 
 app.post("/forgotpassword", (req, res) => {
-    auth.sendResetPasswordEmail(req.body.email);
+    Auth.sendResetPasswordEmail(req.body.email);
     res.redirect("/forgotpassword?code=0");
 });
 
@@ -192,13 +191,13 @@ app.get("/resetpassword/:id", (req, res) => {
 app.post("/resetpassword", async (req, res) => {
     try {
         let resetPasswordId;
-        resetPasswordId = await userValidator.validateResetPasswordId(req.body.resetPasswordId, 2);
+        resetPasswordId = await UserValidator.validateResetPasswordId(req.body.resetPasswordId, 2);
         
         let password;
-        password = await userValidator.validatePasswordLength(req.body.password, 0);
-        password = await userValidator.validatePasswordContent(req.body.password, 1);
+        password = await UserValidator.validatePasswordLength(req.body.password, 0);
+        password = await UserValidator.validatePasswordContent(req.body.password, 1);
         
-        await auth.resetPassword(resetPasswordId, password);
+        await Auth.resetPassword(resetPasswordId, password);
         
         res.redirect("/signin?code=2");
     } catch (error) {
@@ -217,14 +216,14 @@ app.post("/resetpassword", async (req, res) => {
 
 app.post("/changepassword", checkAuthentication, async (req, res) => {
     try {
-        if (!await auth.authenticate(req.user.username, req.body.currentpassword))
+        if (!await Auth.authenticate(req.user.username, req.body.currentpassword))
             throw 1;
         
         let newPassword;
-        newPassword = await userValidator.validatePasswordLength(req.body.newpassword, 2);
-        newPassword = await userValidator.validatePasswordContent(req.body.newpassword, 3);
+        newPassword = await UserValidator.validatePasswordLength(req.body.newpassword, 2);
+        newPassword = await UserValidator.validatePasswordContent(req.body.newpassword, 3);
         
-        await auth.changePassword(req.user.id, newPassword);
+        await Auth.changePassword(req.user.id, newPassword);
         
         return res.redirect("/account?code=0");
     } catch (error) {
@@ -236,10 +235,10 @@ app.post("/changepassword", checkAuthentication, async (req, res) => {
 
 app.post("/deleteaccount", checkAuthentication, async (req, res) => {
     try {
-        if (!await auth.authenticate(req.user.username, req.body.password))
+        if (!await Auth.authenticate(req.user.username, req.body.password))
             throw 4;
         
-        await auth.deleteAccount(req.user.id);
+        await Auth.deleteAccount(req.user.id);
         
         req.logOut();
         res.redirect("/");
