@@ -1,0 +1,27 @@
+.embed-video {
+    width: 256px;
+    height: 144px;
+    
+    border: none;
+}
+
+@media screen and (min-width: 546px) {
+    .embed-video {
+        width: 426px;
+        height: 240px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .embed-video {
+        width: 480px;
+        height: 360px;
+    }
+}
+
+@media screen and (min-width: 760px) {
+    .embed-video {
+        width: 640px;
+        height: 480px;
+    }
+}

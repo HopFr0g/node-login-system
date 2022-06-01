@@ -1,0 +1,28 @@
+.notification {
+    margin: 20px 0 10px 0;
+    padding: 8px;
+}
+
+.notification__title {
+    margin: 8px 0;
+    font-family: var(--main-font);
+    font-weight: 600;
+    font-size: 12pt;
+}
+
+.notification__description {
+    margin: 4px 0 8px 0;
+    font-family: var(--main-font);
+    font-weight: 100;
+    font-size: 12pt;
+}
+
+.error {
+    background: #FFC0C0;
+    color: var(--red);
+}
+
+.success {
+    background: #8BfA8B;
+    color: var(--dark-green);
+}

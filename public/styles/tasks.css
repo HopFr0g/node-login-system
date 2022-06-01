@@ -1,0 +1,127 @@
+/* Mobile-first design: */
+.main {
+    padding: 12px;
+}
+
+.collection-selector {
+    width: 100%;
+    
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 12px auto;
+}
+
+.create-button {
+    height: 40px;
+    width: 50%;
+    min-width: 200px;
+    
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 16px;
+}
+
+.reg {
+    width: 100%;
+    
+    padding: 8px;
+    margin: 12px auto;
+    
+    position: relative;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 78px 1fr 64px;
+    text-align: center;
+}
+
+.reg__moment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reg__moment-date, .reg__moment-time, .reg__moment-repeat {
+    margin: auto;
+}
+
+.reg__moment-date {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.reg__moment-time {
+    font-size: 12px;
+    margin-top: 2px; 
+    margin-bottom: 2px; 
+}
+
+.reg__moment-repeat {
+    font-size: 12px;
+    color: var(--light-blue);
+    margin-top: 2px;
+}
+
+.reg__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.reg__info-title {
+    font-size: 12pt;
+    margin-bottom: 4px;
+}
+
+.reg__info-description {
+    font-size: 11pt;
+}
+
+.reg__button-container {
+    margin-top: 16px;
+}
+
+.reg__button-edit, .reg__button-remove {
+    width: 48px;
+    height: 48px;
+    
+    margin: auto 5px;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Desktop design: */
+@media screen and (min-width: 700px) {
+    .reg {
+        grid-template-columns: 150px 1fr 126px;
+        grid-template-rows: 60px;
+        text-align: start;
+    }
+    
+    .reg__date {
+        font-size: 24px;
+        margin: 18px;
+    }
+    
+    .reg__info-title {
+        font-size: 14pt;
+    }
+    
+    .reg__info-description {
+        font-size: 12pt;
+    }
+    
+    .reg__button-container {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .reg__button-edit, .reg__button-remove {
+        margin: 6px;
+    }
+}

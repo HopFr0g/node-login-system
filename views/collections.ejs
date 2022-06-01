@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- settings: -->
+        <meta charset="utf-8">
+        <title>Agenda - My collections</title>
+        
+        <!-- CSS main file: -->
+        <link rel="stylesheet" type="text/css" href="/styles/collections.css">
+        
+        <!-- CSS general purpose files: -->
+        <link rel="stylesheet" type="text/css" href="/styles/env.css">
+        <link rel="stylesheet" type="text/css" href="/styles/fancy.css">
+        <link rel="stylesheet" type="text/css" href="/styles/normalize.css">
+        <link rel="stylesheet" type="text/css" href="/styles/structure.css">
+        <link rel="stylesheet" type="text/css" href="/styles/notification.css">
+        <link rel="stylesheet" type="text/css" href="/styles/loading-screen.css">
+        
+        <!-- meta viewport tag: -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- icons script: -->
+        <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
+        
+        <!-- fonts: -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content">
+            <header class="header">
+                <h1>Agenda</h1>
+            </header>
+            <nav class="nav">
+                <nav class="nav-responsive">
+                    <div class="nav-responsive__button-container">
+                        <div class="nav-responsive__button fas fa-bars"></div>
+                    </div>
+                    <div class="nav-responsive__a-container">
+                        <a href="/" class="nav-responsive__a"><i class="fas fa-home"></i>Home</a>
+                        <a href="/collections" class="nav-responsive__a active"><i class="fas fa-book"></i>My collections</a>
+                        <a href="/tasks" class="nav-responsive__a"><i class="fas fa-clock"></i>Tasks</a>
+                        <a href="/bots" class="nav-responsive__a"><i class="fas fa-robot"></i>Bots</a>
+                        <% if (typeof username == "string") { %>
+                            <a href="/account" class="nav-responsive__a"><i class="fas fa-user"></i><%= username %></a>
+                        <% } else { %>
+                            <a href="/signin" class="nav-responsive__a"><i class="fas fa-user"></i>Sign in</a>
+                        <% } %>
+                    </div>
+                </nav>
+                <nav class="nav-normal">
+                    <a href="/" class="nav-normal__a"><i class="fas fa-home"></i>Home</a>
+                    <a href="/collections" class="nav-normal__a active"><i class="fas fa-book"></i>My collections</a>
+                    <a href="/tasks" class="nav-normal__a"><i class="fas fa-clock"></i>My tasks</a>
+                    <a href="/bots" class="nav-normal__a"><i class="fas fa-robot"></i>Bots</a>
+                    <% if (typeof username == "string") { %>
+                        <a href="/account" class="nav-normal__a nav-normal__a-right"><i class="fas fa-user"></i><%= username %></a>
+                    <% } else { %>
+                        <a href="/signin" class="nav-normal__a nav-normal__a-right"><i class="fas fa-user"></i>Sign in</a>
+                    <% } %>
+                </nav>
+            </nav>
+            <main class="main">
+                <button class="create-button fancy__button-green">Create a new collection</button>
+                
+                <div class="loading-screen" style="display: none">
+                    <img src="/img/loading.gif">
+                </div>
+            </main>
+            <footer class="footer">
+                Put your footer here
+            </footer>
+        </div>
+        
+        <div class="notification" style="display: none">
+            <div class="notification__window">
+                <h3 class="notification__window-title"></h3>
+                <p class="notification__window-description"></p>
+                <button class="notification__window-button fancy__button-green"></button>
+                <p class="notification__window-alternativebutton" style="display: none"></p>
+            </div>
+        </div>
+        
+        <script src="/scripts/structure.js"></script>
+        <script src="/scripts/collections.js" type="module"></script>
+    </body>
+</html>

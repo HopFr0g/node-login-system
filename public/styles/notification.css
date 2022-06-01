@@ -1,0 +1,73 @@
+/* this css file stylizes notification popups: */
+
+/* Mobile-first design: */
+
+.notification {
+    position: fixed;
+    top: 0;
+    z-index: 15000;
+    
+    background: #00000080;
+    
+    width: 100vw;
+    height: 100vh;
+    
+    top: 0;
+    left: 0;
+}
+
+.notification__window {
+    width: 100%;
+    height: 200px;
+    
+    position: absolute;
+    z-index: 20000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    margin: auto;
+    padding: 8px;
+    
+    background: var(--background-color-light);
+    box-shadow: 0px 0px 5px var(--black);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    text-align: center;
+}
+
+.notification__window-title, .notification__window-description, .notification__window-alternativebutton {
+    color: var(--text-color);
+}
+
+.notification__window-title, .notification__window-description {
+    margin: 8px;
+}
+
+.notification__window-button {
+    width: 80%;
+    height: 40px;
+    
+    position: relative;
+    margin-bottom: 8px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.notification__window-alternativebutton {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 8px;
+}
+
+/* Desktop design: */
+
+@media screen and (min-width: 600px) {
+    .notification__window {
+        width: 350px;
+    }
+}

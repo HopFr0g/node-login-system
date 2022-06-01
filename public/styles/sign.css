@@ -1,0 +1,36 @@
+.form {
+    min-width: 20px;
+    width: 80%;
+    
+    margin: auto;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.form__title {
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.form__submit {
+    margin: 32px 0;
+}
+
+.announcement {
+    font-family: var(--main-font);
+    font-weight: 100;
+    font-size: 12pt;
+    color: var(--text-color);
+    
+    margin-top: 10px;
+}
+
+.announcement a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.announcement a:hover {
+    color: var(--light-blue);
+}
