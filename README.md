@@ -18,4 +18,4 @@ A login system built with Node.js (using the Express.js, Passport.js, Bcrypt, Be
 - Recover forgotten password
 
 ### About me:
-Created by [Poletti Leonel](https://leonelpoletti.glitch.me/) (HopFr0g) 🐸
+Created by [Leonel Poletti](https://leonelpoletti.glitch.me/) (HopFr0g) 🐸
