@@ -1,8 +1,5 @@
 "use strict";
 
-// Secret (used to store session data on user's browser):
-const secret = "REfg#45$5$%6$t6sd6U%&u$5";
-
 // Libraries:
 const express = require("express");
 const app = express();
@@ -16,12 +13,15 @@ const PasportLocal = require("passport-local").Strategy;
 const auth = require("./auth.js");
 const userValidator = require("./user-validator.js");
 const dbManager = require("./dbmanager.js");
+const settingsLoader = require("./settingsLoader.js");
 
 // Express middleware to read request body:
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // Cookie parser:
+const secret = settingsLoader.load("cookieParserSecret");
+console.log(secret);
 app.use(cookieParser(secret));
 
 // EJS view engine:
