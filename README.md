@@ -16,3 +16,6 @@ A login system built with Node.js (using the Express.js, Passport.js, Bcrypt, Be
 - Modify your password
 - Delete your account
 - Recover forgotten password
+
+### About me:
+Created by [Poletti Leonel](https://leonelpoletti.glitch.me/) (HopFr0g) 🐸
