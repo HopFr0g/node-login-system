@@ -145,7 +145,7 @@ app.post("/signup", async (req, res) => {
         let confirmationCode = await Auth.registerUser(validatedData);
         
         // TODO: Send e-mail with confirmation code
-        console.log(`http://127.0.0.1:3000/signup/confirm/${confirmationCode}`);
+        console.log(`http://localhost:3000/signup/confirm/${confirmationCode}`);
         
         return res.redirect(`/signup?code=0`);
     } catch (error) {
